@@ -1,7 +1,6 @@
 package com.ylsq.frame.sys.secu.web;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +37,6 @@ import com.ylsq.frame.sys.secu.service.SecuRoleMenuService;
 import com.ylsq.frame.sys.secu.service.SecuRoleService;
 import com.ylsq.frame.sys.secu.service.SecuUserRoleService;
 import com.ylsq.frame.sys.secu.service.SecuUserService;
-import com.ylsq.frame.sys.secu.sorter.MenuSorter;
 
 
 @Controller
@@ -178,6 +176,8 @@ public class SecuRoleController extends BaseModelController {
 			allMenuNames.add(sm.getMenuName());
 		String[] idArray = StringUtils.defaultIfEmpty(selectedMenuIds, "").split(",");
 		for(String menuName : idArray) {
+			if(StringUtils.isBlank(menuName))
+				continue;
 			if(existingMap.keySet().contains(menuName)) {
 				mappingList.remove(existingMap.get(menuName));
 			}
@@ -237,6 +237,8 @@ public class SecuRoleController extends BaseModelController {
 		
 		String[] idArray = StringUtils.defaultIfEmpty(selectedUserNames, "").split("-");
 		for(String userName : idArray) {
+			if(StringUtils.isBlank(userName))
+				continue;
 			if(existingMap.keySet().contains(userName)) {
 				mappingList.remove(existingMap.get(userName));
 			}
