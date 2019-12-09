@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylsq.frame.sys.base.dao.mapper.SysParamConfigMapper">
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.sys.base.dao.model.SysParamConfig">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="config_name" jdbcType="VARCHAR" property="configName" />
+    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
+    <result column="show_name" jdbcType="VARCHAR" property="showName" />
+    <result column="data_length" jdbcType="INTEGER" property="dataLength" />
+    <result column="not_null" jdbcType="INTEGER" property="notNull" />
+    <result column="is_of_uniq" jdbcType="INTEGER" property="isOfUniq" />
+    <result column="config_order" jdbcType="INTEGER" property="configOrder" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, param_name, config_name, data_type, show_name, data_length, not_null, is_of_uniq, 
+    config_order, create_time, create_user, rec_status
+  </sql>
+  <select id="selectByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_param_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_param_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfigExample">
+    delete from sys_param_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfig">
+    insert into sys_param_config (id, param_name, config_name, 
+      data_type, show_name, data_length, 
+      not_null, is_of_uniq, config_order, 
+      create_time, create_user, rec_status
+      )
+    values (#{id,jdbcType=BIGINT}, #{paramName,jdbcType=VARCHAR}, #{configName,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=VARCHAR}, #{showName,jdbcType=VARCHAR}, #{dataLength,jdbcType=INTEGER}, 
+      #{notNull,jdbcType=INTEGER}, #{isOfUniq,jdbcType=INTEGER}, #{configOrder,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{recStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfig">
+    insert into sys_param_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paramName != null">
+        param_name,
+      </if>
+      <if test="configName != null">
+        config_name,
+      </if>
+      <if test="dataType != null">
+        data_type,
+      </if>
+      <if test="showName != null">
+        show_name,
+      </if>
+      <if test="dataLength != null">
+        data_length,
+      </if>
+      <if test="notNull != null">
+        not_null,
+      </if>
+      <if test="isOfUniq != null">
+        is_of_uniq,
+      </if>
+      <if test="configOrder != null">
+        config_order,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="recStatus != null">
+        rec_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="paramName != null">
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="configName != null">
+        #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null">
+        #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataLength != null">
+        #{dataLength,jdbcType=INTEGER},
+      </if>
+      <if test="notNull != null">
+        #{notNull,jdbcType=INTEGER},
+      </if>
+      <if test="isOfUniq != null">
+        #{isOfUniq,jdbcType=INTEGER},
+      </if>
+      <if test="configOrder != null">
+        #{configOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recStatus != null">
+        #{recStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfigExample" resultType="java.lang.Long">
+    select count(*) from sys_param_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_param_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.paramName != null">
+        param_name = #{record.paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configName != null">
+        config_name = #{record.configName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataType != null">
+        data_type = #{record.dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showName != null">
+        show_name = #{record.showName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataLength != null">
+        data_length = #{record.dataLength,jdbcType=INTEGER},
+      </if>
+      <if test="record.notNull != null">
+        not_null = #{record.notNull,jdbcType=INTEGER},
+      </if>
+      <if test="record.isOfUniq != null">
+        is_of_uniq = #{record.isOfUniq,jdbcType=INTEGER},
+      </if>
+      <if test="record.configOrder != null">
+        config_order = #{record.configOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recStatus != null">
+        rec_status = #{record.recStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_param_config
+    set id = #{record.id,jdbcType=BIGINT},
+      param_name = #{record.paramName,jdbcType=VARCHAR},
+      config_name = #{record.configName,jdbcType=VARCHAR},
+      data_type = #{record.dataType,jdbcType=VARCHAR},
+      show_name = #{record.showName,jdbcType=VARCHAR},
+      data_length = #{record.dataLength,jdbcType=INTEGER},
+      not_null = #{record.notNull,jdbcType=INTEGER},
+      is_of_uniq = #{record.isOfUniq,jdbcType=INTEGER},
+      config_order = #{record.configOrder,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      rec_status = #{record.recStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfig">
+    update sys_param_config
+    <set>
+      <if test="paramName != null">
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="configName != null">
+        config_name = #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null">
+        show_name = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataLength != null">
+        data_length = #{dataLength,jdbcType=INTEGER},
+      </if>
+      <if test="notNull != null">
+        not_null = #{notNull,jdbcType=INTEGER},
+      </if>
+      <if test="isOfUniq != null">
+        is_of_uniq = #{isOfUniq,jdbcType=INTEGER},
+      </if>
+      <if test="configOrder != null">
+        config_order = #{configOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recStatus != null">
+        rec_status = #{recStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamConfig">
+    update sys_param_config
+    set param_name = #{paramName,jdbcType=VARCHAR},
+      config_name = #{configName,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=VARCHAR},
+      show_name = #{showName,jdbcType=VARCHAR},
+      data_length = #{dataLength,jdbcType=INTEGER},
+      not_null = #{notNull,jdbcType=INTEGER},
+      is_of_uniq = #{isOfUniq,jdbcType=INTEGER},
+      config_order = #{configOrder,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      rec_status = #{recStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

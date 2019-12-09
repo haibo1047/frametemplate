@@ -1,0 +1,65 @@
+
+<div class="title_left">
+    <h3>为角色${role.roleName}配置菜单</h3>
+  </div>
+<br>
+
+<div class="x_content">
+	<form id="configMenusForm" method="post" action="$rc.contextPath/sys/role/configMenus.n">
+		<input type="hidden" name="selectedIds" id="selectedIds">
+		<input type="hidden" name="roleName" value="${role.roleName}">
+		
+		<div id="jstree_menu">
+			<ul>
+				<li> system
+					<ul>
+					#foreach($menu in $allMenus)
+				   		<li id="${menu.menuName}">${menu.menuName} - ${menu.menuUrl}</li>
+					#end
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="ln_solid"></div>
+	  	<div class="form-group">
+		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+		      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+		      <button type="button" onclick="f_submit()" class="btn btn-success">Submit</button>
+		    </div>
+	  	</div>
+    </form>
+  
+</div>
+
+
+<script>
+function frameinit(){
+	$('#jstree_menu').jstree(
+		{
+			"core" :{
+				"themes" : {"variant" : "large"},
+			},
+			"types" : {
+				"default" : {
+					"icon" : "glyphicon glyphicon-ok"
+				}
+			},
+			"checkbox" :{
+				"keep_selected_style" : true
+			},
+			"plugins" : [ "search", "types", "wholerow", "checkbox" ]
+		}
+	);
+	$("#jstree_menu").jstree('check_node',${selectedMenuNames});  
+}
+
+function f_submit(){
+	$("#selectedIds").val($('#jstree_menu').jstree("get_checked"));
+	$("#configMenusForm").submit();
+}
+
+function goback(){
+	location = "$rc.contextPath/sys/role/list.n";
+}
+</script>

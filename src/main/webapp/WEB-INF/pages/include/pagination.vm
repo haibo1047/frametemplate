@@ -1,0 +1,65 @@
+
+#set($pageSize = $session.getAttribute("pageSize"))
+
+#set($aroundIndex = 3)
+#set($totalPages = ${total}*1.0/${pageSize})
+#set($totalPages = $math.ceil($totalPages))
+#set($totalPages_1 = $totalPages - 1 )
+#set($totalPages_1 = $math.max( 0, $totalPages_1 ) )
+#set($pageNum = ${modelList.pageNum})
+#set($the1st = $pageNum - $aroundIndex )
+#set($the2nd = $pageNum + $aroundIndex )
+#if($the1st <= 2)
+	#set( $the2nd = 2 + $aroundIndex*2  )
+#end
+#if($the2nd >= $totalPages)
+	#set( $the1st = $totalPages_1 - $aroundIndex*2  )
+#end
+#set($the1st = $math.max(2, $the1st ) )
+#set($the1st = $math.min($the1st, $totalPages) )
+
+#set($the2nd = $math.min($totalPages_1, $the2nd )  )
+
+#if(${total} >0)
+<script>
+function gotopage(pageNum){
+	location = window.location.pathname+"?pageNum="+pageNum
+}
+</script>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">
+		Showing ${pageNum}/${totalPages} page of ${total} entries  ##[for debug 1st: $the1st / 2nd: $the2nd]
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+			<ul class="pagination">
+				<li class="paginate_button previous #if($pageNum <= 1) disabled #end" id="datatable_previous">
+					<a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" #if($pageNum > 1) onclick="gotopage($pageNum - 1)" #end>Previous</a>
+				</li>
+				#if($totalPages >1)
+				<li class="paginate_button #if(1 == $pageNum) active #end">
+					<a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" onclick="gotopage(1)">1</a>
+				</li>
+				#end
+				##if($totalPages > $aroundIndex*2)
+				#if($the2nd >= $the1st)
+					#foreach( $i  in [$the1st..$the2nd])
+					<li class="paginate_button #if($i == $pageNum) active #end ">
+						<a href="#" aria-controls="datatable" onclick="gotopage($i)">$i</a>
+					</li>
+					#end
+				#end
+				<li class="paginate_button #if(${totalPages} == $pageNum) active #end">
+					<a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" onclick="gotopage(${totalPages})">${totalPages}</a>
+				</li>
+				<li class="paginate_button next #if($pageNum >= ${totalPages}) disabled #end" id="datatable_next">
+					<a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0" #if($pageNum < ${totalPages}) onclick="gotopage($pageNum + 1)" #end>Next</a>
+				</li>
+			</ul>
+		</div> ##datatable
+	</div>
+</div>  ##row       
+#end

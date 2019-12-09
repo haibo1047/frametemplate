@@ -1,0 +1,30 @@
+<div class="col-md-3"  style="border-right:dash;height:500px;">
+	<div class="clearfix"></div>
+	<div id="jstree_org">
+		<ul>
+			<li id="0"> Root
+				<ul>
+				#foreach($lv1node in $orgList)
+			   		<li id="${lv1node.id}">${lv1node.orgName}
+				   		#if($lv1node.subOrgs)
+				   			<ul>##level2 start
+							#foreach($lv2node in $!{lv1node.subOrgs} )
+						   		<li id="${lv2node.id}">${lv2node.orgName}
+							   		#if($lv2node.subOrgs)
+							   			<ul>##level3 start
+										#foreach($lv3node in $!{lv2node.subOrgs} )
+									   		<li id="${lv3node.id}">${lv3node.orgName}</li>
+										#end
+										</ul>##level3 end
+							   		#end
+						   		</li>
+							#end
+							</ul>##level2 end
+				   		#end
+			   		</li>
+				#end
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

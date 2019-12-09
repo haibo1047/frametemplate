@@ -1,0 +1,25 @@
+<br />
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/systemsetting/" method="post">
+	<input type="hidden" name="valueId" value="$!{valueId}">
+  	#foreach($setting in $settings)
+	  	<div class="form-group">
+		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">${setting.name}</label>
+		    <div class="col-md-6 col-sm-6 col-xs-12">
+		      	<input type="text" id="${setting.valueIndex}" name="${setting.config}" value="$!{setting.value}" class="form-control col-md-7 col-xs-12">
+		    </div>
+	 	</div>
+ 	#end
+  	<div class="ln_solid"></div>
+  	<div class="form-group">
+    	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      		<button type="button" class="btn btn-primary" onclick="fhome()">Return</button>
+      		<button type="submit" class="btn btn-success">Submit</button>
+    	</div>
+  	</div>
+</form>
+
+<script>
+	function fhome(){
+		location = "$rc.contextPath/";
+	}
+</script>

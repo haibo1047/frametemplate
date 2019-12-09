@@ -1,0 +1,97 @@
+  
+<div class="title_left">
+    <h3>System Parameter Configs </h3>
+</div>
+<div class="x_content">
+	
+	<p>
+		<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
+		<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
+		<button type="button" class="btn btn-round btn-primary" onclick="goback()">Return</button>
+	</p>
+	
+	<div class="table-responsive">
+	  	<table class="table table-striped jambo_table bulk_action">
+		    <thead>
+		      	<tr class="headings">
+			        <th>
+			          <input type="checkbox" id="check-all" class="flat">
+			        </th>
+			        <th class="column-title"> Config Name </th>
+			        <th class="column-title"> Show Name </th>
+			        <th class="column-title"> Data Type </th>
+			        <th class="column-title"> Data Length </th>
+			        <th class="column-title"> Not Null </th>
+			        <th class="column-title"> Is Of Uniq </th>
+			        <th class="column-title"> Order </th>
+			        <th class="column-title"> Create Time </th>
+			        <th class="column-title"> Create User </th>
+			        <th class="column-title no-link last">
+			        	<span class="nobr">
+			        		Operation
+			        	</span>
+			        </th>
+			        <th class="bulk-actions" colspan="10">
+			          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+			        </th>
+		      	</tr>
+			</thead>
+	    	<tbody>
+	    		#foreach ($model in $configList)
+	      		<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+	        		<td class="a-center ">
+	          			<input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
+			        </td>
+			        <td class=" "> $!{model.configName} </td>
+			        <td class=" "> $!{model.showName} </td>
+			        <td class=" "> #dictDisplay ( $dataTypeList $!{model.dataType} "value1" "value2" ) </td>
+			        <td class=" "> $!{model.dataLength} </td>
+			        <td class=" "> #dictDisplay ( $alternativeList $!{model.notNull} "value1" "value2" ) </td>
+			        <td class=" "> #dictDisplay ( $alternativeList $!{model.isOfUniq} "value1" "value2" )</td>
+			        <td class=" "> $!{model.configOrder} </td>
+			        <td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
+			        <td class=" "> $!{model.createUser}</td>
+			        <td class=" last">
+						<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+						<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+			        </td>
+		      	</tr>
+	      		#end
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script>
+var ID_INDEX=1
+function goback(){
+	location = "$rc.contextPath/sys/param/list"
+}
+function create(){
+	location = "$rc.contextPath/sys/param/createConfig/$!{paramName}"
+}
+function deletemultiple(){
+	var ids = "";
+	var selted = $("input[name='table_records']:checked");
+	$(selted).each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	if($(selted).length==0){
+		return;
+	}
+	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
+		location = "$rc.contextPath/sys/param/deleteConfig/$!{paramName}/"+ids
+	}
+}
+function editRecord(o){
+	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+	location = "$rc.contextPath/sys/param/editConfig/"+objId
+}
+function delRecord(o){
+	if (confirm('确认要删除此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/sys/param/deleteConfig/$!{paramName}/"+objId
+	}
+}
+
+</script>

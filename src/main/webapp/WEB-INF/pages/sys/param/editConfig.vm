@@ -1,0 +1,73 @@
+
+<div class="title_left">
+    <h3>Config Parameter for [${paramName} ]</h3>
+  </div>
+   <div class="x_content">
+<br />
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/param/saveConfig" method="post">
+	<input type="hidden" name="id" value="$!{model.id}">
+	<input type="hidden" name="paramName" value="${paramName}">
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Config Name <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="configName" name="configName" value="$!{model.configName}" required="required" class="form-control col-md-7 col-xs-12">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="showName" class="control-label col-md-3 col-sm-3 col-xs-12"> Show Name </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="showName" class="form-control col-md-7 col-xs-12" type="text" name="showName" value="$!{model.showName}"> 
+    </div>
+  </div>
+  
+	<div class="form-group">
+	    <label for="dataType" class="control-label col-md-3 col-sm-3 col-xs-12"> Data Type </label>
+	    <div class="col-md-6 col-sm-6 col-xs-12">
+	    	#buildSelect ($dataTypeList "dataType" "$model.dataType" "value1" "value2")
+		</div>
+	</div>
+	
+  
+  <div class="form-group">
+    <label for="dataLength" class="control-label col-md-3 col-sm-3 col-xs-12"> Data Length </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="dataLength" class="form-control col-md-7 col-xs-12" type="text" name="dataLength" value="$!{model.dataLength}"> 
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="notNull" class="control-label col-md-3 col-sm-3 col-xs-12"> Not Null </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      #buildSelect ($alternativeList "notNull" "$model.notNull" "value1" "value2")
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="isOfUniq" class="control-label col-md-3 col-sm-3 col-xs-12"> Is Of Uniq </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      #buildSelect ($alternativeList "isOfUniq" "$model.isOfUniq" "value1" "value2")
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="configOrder" class="control-label col-md-3 col-sm-3 col-xs-12"> Order </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input id="configOrder" class="form-control col-md-7 col-xs-12" type="text" name="configOrder" value="$!{model.configOrder}"> 
+    </div>
+  </div>
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>
+
+</div>
+
+<script>
+function goback(){
+	location = "$rc.contextPath/sys/param/config/${paramName}";
+}
+
+</script>

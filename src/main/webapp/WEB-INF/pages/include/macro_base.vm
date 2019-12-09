@@ -1,0 +1,54 @@
+#macro(defaultIfNull $variable $defaultValue)#if( !$variable)#set($variable = $defaultValue)#end$variable#end
+
+#macro(dynamicexp $variable $field)
+	#set($dynamicexp_exp = "\$variable.$field")
+	#set($dynamicexp_tmpValue = "#evaluate($dynamicexp_exp)" )
+	#if( $dynamicexp_tmpValue.indexOf("$") == 0 ) 
+		#set($dynamicexp_tmpValue = "")
+	#end
+	$dynamicexp_tmpValue
+#end
+
+
+##创建select
+#macro( buildSelect $selectValueList $selectName $selectedValue $valueField $displayField )
+	<select class="form-control" name="$selectName">
+		<option value="">Choose option</option>
+		#foreach($se in $selectValueList )
+		 	#set($valueExpression = "\$se.$valueField")
+		 	#set($displayExpression = "\$se.$displayField")
+		 	#set($tmpValue = "#evaluate($valueExpression)" )
+		 	#set($tmpDisplay = "#evaluate($displayExpression)" )
+		 	#if( $tmpValue.indexOf("$") == 0 ) 
+				#set($tmpValue = "")
+			#end
+		 	#if( $tmpDisplay.indexOf("$") == 0 ) 
+				#set($tmpDisplay = "")
+			#end
+		
+			<option value="$tmpValue" #if( $tmpValue == $selectedValue ) selected="selected" #end> $tmpDisplay </option>
+		#end
+	</select>
+#end
+
+##根据字典值显示名称
+#macro( dictDisplay $dictList $currentValue $valueField $displayField)
+	#set($retvalue = "")
+	#foreach($de in $dictList )
+		#set($valueExpression = "\$de.$valueField")
+	 	#set($displayExpression = "\$de.$displayField")
+	 	#set($tmpValue = "#evaluate($valueExpression)" )
+	 	#set($tmpDisplay = "#evaluate($displayExpression)" )
+	 	#if( $tmpValue.indexOf("$") == 0 ) 
+			#set($tmpValue = "")
+		#end
+		
+		#if( $currentValue == $tmpValue )
+		 	#if( $tmpDisplay.indexOf("$") == -1 ) 
+				#set($retvalue = "$tmpDisplay")
+			#end
+			#break
+		#end
+	#end
+	$retvalue
+#end

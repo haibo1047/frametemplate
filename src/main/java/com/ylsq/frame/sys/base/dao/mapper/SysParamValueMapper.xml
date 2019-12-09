@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylsq.frame.sys.base.dao.mapper.SysParamValueMapper">
+  <resultMap id="BaseResultMap" type="com.ylsq.frame.sys.base.dao.model.SysParamValue">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="value_1" jdbcType="VARCHAR" property="value1" />
+    <result column="value_2" jdbcType="VARCHAR" property="value2" />
+    <result column="value_3" jdbcType="VARCHAR" property="value3" />
+    <result column="value_4" jdbcType="VARCHAR" property="value4" />
+    <result column="value_5" jdbcType="VARCHAR" property="value5" />
+    <result column="value_6" jdbcType="VARCHAR" property="value6" />
+    <result column="value_7" jdbcType="VARCHAR" property="value7" />
+    <result column="value_8" jdbcType="VARCHAR" property="value8" />
+    <result column="value_9" jdbcType="VARCHAR" property="value9" />
+    <result column="value_10" jdbcType="VARCHAR" property="value10" />
+    <result column="value_11" jdbcType="VARCHAR" property="value11" />
+    <result column="value_12" jdbcType="VARCHAR" property="value12" />
+    <result column="value_13" jdbcType="VARCHAR" property="value13" />
+    <result column="value_14" jdbcType="VARCHAR" property="value14" />
+    <result column="value_15" jdbcType="VARCHAR" property="value15" />
+    <result column="value_16" jdbcType="VARCHAR" property="value16" />
+    <result column="value_17" jdbcType="VARCHAR" property="value17" />
+    <result column="value_18" jdbcType="VARCHAR" property="value18" />
+    <result column="value_19" jdbcType="VARCHAR" property="value19" />
+    <result column="value_20" jdbcType="VARCHAR" property="value20" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="rec_status" jdbcType="INTEGER" property="recStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, param_name, value_1, value_2, value_3, value_4, value_5, value_6, value_7, value_8, 
+    value_9, value_10, value_11, value_12, value_13, value_14, value_15, value_16, value_17, 
+    value_18, value_19, value_20, create_time, create_user, rec_status
+  </sql>
+  <select id="selectByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValueExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_param_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param_value
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_param_value
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValueExample">
+    delete from sys_param_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValue">
+    insert into sys_param_value (id, param_name, value_1, 
+      value_2, value_3, value_4, 
+      value_5, value_6, value_7, 
+      value_8, value_9, value_10, 
+      value_11, value_12, value_13, 
+      value_14, value_15, value_16, 
+      value_17, value_18, value_19, 
+      value_20, create_time, create_user, 
+      rec_status)
+    values (#{id,jdbcType=BIGINT}, #{paramName,jdbcType=VARCHAR}, #{value1,jdbcType=VARCHAR}, 
+      #{value2,jdbcType=VARCHAR}, #{value3,jdbcType=VARCHAR}, #{value4,jdbcType=VARCHAR}, 
+      #{value5,jdbcType=VARCHAR}, #{value6,jdbcType=VARCHAR}, #{value7,jdbcType=VARCHAR}, 
+      #{value8,jdbcType=VARCHAR}, #{value9,jdbcType=VARCHAR}, #{value10,jdbcType=VARCHAR}, 
+      #{value11,jdbcType=VARCHAR}, #{value12,jdbcType=VARCHAR}, #{value13,jdbcType=VARCHAR}, 
+      #{value14,jdbcType=VARCHAR}, #{value15,jdbcType=VARCHAR}, #{value16,jdbcType=VARCHAR}, 
+      #{value17,jdbcType=VARCHAR}, #{value18,jdbcType=VARCHAR}, #{value19,jdbcType=VARCHAR}, 
+      #{value20,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{recStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValue">
+    insert into sys_param_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paramName != null">
+        param_name,
+      </if>
+      <if test="value1 != null">
+        value_1,
+      </if>
+      <if test="value2 != null">
+        value_2,
+      </if>
+      <if test="value3 != null">
+        value_3,
+      </if>
+      <if test="value4 != null">
+        value_4,
+      </if>
+      <if test="value5 != null">
+        value_5,
+      </if>
+      <if test="value6 != null">
+        value_6,
+      </if>
+      <if test="value7 != null">
+        value_7,
+      </if>
+      <if test="value8 != null">
+        value_8,
+      </if>
+      <if test="value9 != null">
+        value_9,
+      </if>
+      <if test="value10 != null">
+        value_10,
+      </if>
+      <if test="value11 != null">
+        value_11,
+      </if>
+      <if test="value12 != null">
+        value_12,
+      </if>
+      <if test="value13 != null">
+        value_13,
+      </if>
+      <if test="value14 != null">
+        value_14,
+      </if>
+      <if test="value15 != null">
+        value_15,
+      </if>
+      <if test="value16 != null">
+        value_16,
+      </if>
+      <if test="value17 != null">
+        value_17,
+      </if>
+      <if test="value18 != null">
+        value_18,
+      </if>
+      <if test="value19 != null">
+        value_19,
+      </if>
+      <if test="value20 != null">
+        value_20,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="recStatus != null">
+        rec_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="paramName != null">
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="value1 != null">
+        #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null">
+        #{value2,jdbcType=VARCHAR},
+      </if>
+      <if test="value3 != null">
+        #{value3,jdbcType=VARCHAR},
+      </if>
+      <if test="value4 != null">
+        #{value4,jdbcType=VARCHAR},
+      </if>
+      <if test="value5 != null">
+        #{value5,jdbcType=VARCHAR},
+      </if>
+      <if test="value6 != null">
+        #{value6,jdbcType=VARCHAR},
+      </if>
+      <if test="value7 != null">
+        #{value7,jdbcType=VARCHAR},
+      </if>
+      <if test="value8 != null">
+        #{value8,jdbcType=VARCHAR},
+      </if>
+      <if test="value9 != null">
+        #{value9,jdbcType=VARCHAR},
+      </if>
+      <if test="value10 != null">
+        #{value10,jdbcType=VARCHAR},
+      </if>
+      <if test="value11 != null">
+        #{value11,jdbcType=VARCHAR},
+      </if>
+      <if test="value12 != null">
+        #{value12,jdbcType=VARCHAR},
+      </if>
+      <if test="value13 != null">
+        #{value13,jdbcType=VARCHAR},
+      </if>
+      <if test="value14 != null">
+        #{value14,jdbcType=VARCHAR},
+      </if>
+      <if test="value15 != null">
+        #{value15,jdbcType=VARCHAR},
+      </if>
+      <if test="value16 != null">
+        #{value16,jdbcType=VARCHAR},
+      </if>
+      <if test="value17 != null">
+        #{value17,jdbcType=VARCHAR},
+      </if>
+      <if test="value18 != null">
+        #{value18,jdbcType=VARCHAR},
+      </if>
+      <if test="value19 != null">
+        #{value19,jdbcType=VARCHAR},
+      </if>
+      <if test="value20 != null">
+        #{value20,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recStatus != null">
+        #{recStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValueExample" resultType="java.lang.Long">
+    select count(*) from sys_param_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_param_value
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.paramName != null">
+        param_name = #{record.paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value1 != null">
+        value_1 = #{record.value1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value2 != null">
+        value_2 = #{record.value2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value3 != null">
+        value_3 = #{record.value3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value4 != null">
+        value_4 = #{record.value4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value5 != null">
+        value_5 = #{record.value5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value6 != null">
+        value_6 = #{record.value6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value7 != null">
+        value_7 = #{record.value7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value8 != null">
+        value_8 = #{record.value8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value9 != null">
+        value_9 = #{record.value9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value10 != null">
+        value_10 = #{record.value10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value11 != null">
+        value_11 = #{record.value11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value12 != null">
+        value_12 = #{record.value12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value13 != null">
+        value_13 = #{record.value13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value14 != null">
+        value_14 = #{record.value14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value15 != null">
+        value_15 = #{record.value15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value16 != null">
+        value_16 = #{record.value16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value17 != null">
+        value_17 = #{record.value17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value18 != null">
+        value_18 = #{record.value18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value19 != null">
+        value_19 = #{record.value19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value20 != null">
+        value_20 = #{record.value20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recStatus != null">
+        rec_status = #{record.recStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_param_value
+    set id = #{record.id,jdbcType=BIGINT},
+      param_name = #{record.paramName,jdbcType=VARCHAR},
+      value_1 = #{record.value1,jdbcType=VARCHAR},
+      value_2 = #{record.value2,jdbcType=VARCHAR},
+      value_3 = #{record.value3,jdbcType=VARCHAR},
+      value_4 = #{record.value4,jdbcType=VARCHAR},
+      value_5 = #{record.value5,jdbcType=VARCHAR},
+      value_6 = #{record.value6,jdbcType=VARCHAR},
+      value_7 = #{record.value7,jdbcType=VARCHAR},
+      value_8 = #{record.value8,jdbcType=VARCHAR},
+      value_9 = #{record.value9,jdbcType=VARCHAR},
+      value_10 = #{record.value10,jdbcType=VARCHAR},
+      value_11 = #{record.value11,jdbcType=VARCHAR},
+      value_12 = #{record.value12,jdbcType=VARCHAR},
+      value_13 = #{record.value13,jdbcType=VARCHAR},
+      value_14 = #{record.value14,jdbcType=VARCHAR},
+      value_15 = #{record.value15,jdbcType=VARCHAR},
+      value_16 = #{record.value16,jdbcType=VARCHAR},
+      value_17 = #{record.value17,jdbcType=VARCHAR},
+      value_18 = #{record.value18,jdbcType=VARCHAR},
+      value_19 = #{record.value19,jdbcType=VARCHAR},
+      value_20 = #{record.value20,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      rec_status = #{record.recStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValue">
+    update sys_param_value
+    <set>
+      <if test="paramName != null">
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="value1 != null">
+        value_1 = #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null">
+        value_2 = #{value2,jdbcType=VARCHAR},
+      </if>
+      <if test="value3 != null">
+        value_3 = #{value3,jdbcType=VARCHAR},
+      </if>
+      <if test="value4 != null">
+        value_4 = #{value4,jdbcType=VARCHAR},
+      </if>
+      <if test="value5 != null">
+        value_5 = #{value5,jdbcType=VARCHAR},
+      </if>
+      <if test="value6 != null">
+        value_6 = #{value6,jdbcType=VARCHAR},
+      </if>
+      <if test="value7 != null">
+        value_7 = #{value7,jdbcType=VARCHAR},
+      </if>
+      <if test="value8 != null">
+        value_8 = #{value8,jdbcType=VARCHAR},
+      </if>
+      <if test="value9 != null">
+        value_9 = #{value9,jdbcType=VARCHAR},
+      </if>
+      <if test="value10 != null">
+        value_10 = #{value10,jdbcType=VARCHAR},
+      </if>
+      <if test="value11 != null">
+        value_11 = #{value11,jdbcType=VARCHAR},
+      </if>
+      <if test="value12 != null">
+        value_12 = #{value12,jdbcType=VARCHAR},
+      </if>
+      <if test="value13 != null">
+        value_13 = #{value13,jdbcType=VARCHAR},
+      </if>
+      <if test="value14 != null">
+        value_14 = #{value14,jdbcType=VARCHAR},
+      </if>
+      <if test="value15 != null">
+        value_15 = #{value15,jdbcType=VARCHAR},
+      </if>
+      <if test="value16 != null">
+        value_16 = #{value16,jdbcType=VARCHAR},
+      </if>
+      <if test="value17 != null">
+        value_17 = #{value17,jdbcType=VARCHAR},
+      </if>
+      <if test="value18 != null">
+        value_18 = #{value18,jdbcType=VARCHAR},
+      </if>
+      <if test="value19 != null">
+        value_19 = #{value19,jdbcType=VARCHAR},
+      </if>
+      <if test="value20 != null">
+        value_20 = #{value20,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recStatus != null">
+        rec_status = #{recStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ylsq.frame.sys.base.dao.model.SysParamValue">
+    update sys_param_value
+    set param_name = #{paramName,jdbcType=VARCHAR},
+      value_1 = #{value1,jdbcType=VARCHAR},
+      value_2 = #{value2,jdbcType=VARCHAR},
+      value_3 = #{value3,jdbcType=VARCHAR},
+      value_4 = #{value4,jdbcType=VARCHAR},
+      value_5 = #{value5,jdbcType=VARCHAR},
+      value_6 = #{value6,jdbcType=VARCHAR},
+      value_7 = #{value7,jdbcType=VARCHAR},
+      value_8 = #{value8,jdbcType=VARCHAR},
+      value_9 = #{value9,jdbcType=VARCHAR},
+      value_10 = #{value10,jdbcType=VARCHAR},
+      value_11 = #{value11,jdbcType=VARCHAR},
+      value_12 = #{value12,jdbcType=VARCHAR},
+      value_13 = #{value13,jdbcType=VARCHAR},
+      value_14 = #{value14,jdbcType=VARCHAR},
+      value_15 = #{value15,jdbcType=VARCHAR},
+      value_16 = #{value16,jdbcType=VARCHAR},
+      value_17 = #{value17,jdbcType=VARCHAR},
+      value_18 = #{value18,jdbcType=VARCHAR},
+      value_19 = #{value19,jdbcType=VARCHAR},
+      value_20 = #{value20,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      rec_status = #{recStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

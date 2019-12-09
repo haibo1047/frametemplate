@@ -1,0 +1,58 @@
+
+<div class="title_left">
+    <h3>为角色${role.roleName}配置用户</h3>
+  </div>
+<br>
+
+<div class="x_content">
+	<form id="configUsersForm" method="post" action="$rc.contextPath/sys/role/configUsers">
+		<input type="hidden" name="selectedIds" id="selectedIds">
+		<input type="hidden" name="roleName" value="${role.roleName}">
+		<div id="jquery-script-center">
+	        <select id="sourceUsers" name="unselected" data-search="Search for options">
+	        	#foreach($left in $unselectedList)
+		            <option value="$!{left.userName}">$!{left.userName} - $!{left.realName}</option>
+	            #end
+	        </select>
+	        <select id="destinationUsers" name="selected"  data-search="Search for options">
+	        	#foreach($right in $selectedList)
+		            <option value="$!{right.userName}">$!{right.userName} - $!{right.realName}</option>
+	            #end
+	        </select>
+		</div>
+		<div class="ln_solid"></div>
+	  	<div class="form-group">
+		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+		      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+		      <button type="button" onclick="f_submit()" class="btn btn-success">Submit</button>
+		    </div>
+	  	</div>
+    </form>
+  
+</div>
+
+
+<script>
+function frameinit(){
+	$('#sourceUsers, #destinationUsers').listswap({
+		truncate:true, 
+		height:300,
+		is_scroll:true,
+		label_add : 'ADD',
+		label_remove : 'REMOVE',
+	});
+}
+
+function f_submit(){
+	var ids = "";
+	$("#destinationUsers option").each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	$("#selectedIds").val(ids);
+	$("#configUsersForm").submit();
+}
+
+function goback(){
+	location = "$rc.contextPath/sys/role/list";
+}
+</script>

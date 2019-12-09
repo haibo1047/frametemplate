@@ -1,0 +1,24 @@
+#set($layout="/include/layout_blank.vm")
+
+
+<link href="$rc.contextPath/css/bootstrap.min.css" rel="stylesheet">
+<link href="$rc.contextPath/css/custom.min.css" rel="stylesheet">
+
+<div class="container body">
+  	<div class="main_container">
+    	<!-- page content -->
+    	<div class="col-md-12">
+      		<div class="col-middle">
+        		<div class="text-center">
+         		 	<h1 class="error-number">500</h1>
+					<br>
+					<br>
+              		<h2>Internal Server Error</h2>
+					<br>
+              		<p>We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing. <a href="#">Report this?</a></p>
+        		</div>
+      		</div>
+    	</div>
+    	<!-- /page content -->
+  	</div>
+</div>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>#springMessage("system.appname")</title>
+
+    <!-- Bootstrap -->
+    <link href="$rc.contextPath/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="$rc.contextPath//css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="$rc.contextPath//css/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="$rc.contextPath//css/prettify.min.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="$rc.contextPath/css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+	
+	<link href="$rc.contextPath/css/listswap.css" rel="stylesheet">
+	<link href="$rc.contextPath/css/jquerysctipttop.css" rel="stylesheet">
+	
+    <!-- Custom styling plus plugins -->
+    <link href="$rc.contextPath/css/custom.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/green.css" rel="stylesheet">
+    
+    <link href="$rc.contextPath/css/jstree.style.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/select2.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    
+</head>
+
+#parse("/include/macro_base.vm")
+
+<body class="nav-md">
+    <div class="container body">
+      	<div class="main_container">
+      	
+        	<div class="col-md-3 left_col menu_fixed">
+      			<div class="left_col scroll-view">
+	 				<div class="clearfix"></div>
+		            <!-- menu profile quick info -->
+		            <div class="profile clearfix">
+		              	<div class="profile_pic">
+		               	 	<img src="$rc.contextPath/images/img.jpg" alt="..." class="img-circle profile_img">
+		             	 </div>
+		             	 <div class="profile_info">
+		              	  	<span>Welcome,</span>
+							#set($loginName = $session.getAttribute("system_login_name_") )
+		               		<h2>$!{loginName}</h2>
+		             	 </div>
+		            </div>
+		            <!-- /menu profile quick info -->
+	
+		            <br />
+					<!-- menu -->
+		            #parse("/include/mymenus.vm")
+					<!-- menu -->
+	         	 </div>
+	        </div>
+
+        	<!-- top navigation -->
+        	<div class="top_nav">
+     	 		<div class="nav_menu">
+            		<nav>
+             			<div class="nav toggle">
+                			<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              			</div>
+
+              			<ul class="nav navbar-nav navbar-right">
+                			<li class="">
+                 				<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    				<img src="$rc.contextPath/images/img.jpg" alt=""> $!{loginName}
+                    				<span class=" fa fa-angle-down"></span>
+              					</a>
+                  				<ul class="dropdown-menu dropdown-usermenu pull-right">
+                    				<li><a href="javascript:;" onclick="myprofile()"> #springMessage("system.profile")</a></li>
+				                    <li>
+				                      	<a href="javascript:;" onclick="syssetting()">
+				                        	##<span class="badge bg-red pull-right">50%</span>
+				                        	<span>#springMessage("system.settings")</span>
+				                      	</a>
+				                    </li>
+				                    <li><a href="javascript:;">#springMessage("system.help")</a></li>
+				                    <li><a href="$rc.contextPath/sys/logout"><i class="fa fa-sign-out pull-right"></i>#springMessage("system.logout")</a></li>
+			                  	</ul>
+			                </li>
+              			</ul>
+            		</nav>
+          		</div>
+        	</div>
+        	<!-- /top navigation -->
+
+        	<!-- page content -->
+        	<div class="right_col" role="main">
+          		<div class="">
+           	 		<div class="page-title">
+            			#if($errorMsg)
+            				$errorMsg
+            			#end
+            			$screen_content
+            
+           	 		</div>
+         		 </div>
+        	</div>
+        	<!-- /page content -->
+
+	        <!-- footer content -->
+	        <footer>
+	          	<div class="pull-right">
+	            	Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+	          	</div>
+	          <div class="clearfix"></div>
+	        </footer>
+	        <!-- /footer content -->
+      	</div>
+	</div>
+</body>
+
+
+<!-- jQuery -->
+<script src="$rc.contextPath/js/jquery.min.js"></script>
+<script src="$rc.contextPath/js/popper.min.js"></script>
+<!-- Bootstrap -->
+<script src="$rc.contextPath/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="$rc.contextPath/js/fastclick.js"></script>
+<!-- NProgress -->
+<script src="$rc.contextPath/js/nprogress.js"></script>
+<!-- bootstrap-wysiwyg -->
+<script src="$rc.contextPath/js/bootstrap-wysiwyg.min.js"></script>
+<script src="$rc.contextPath/js/jquery.hotkeys.js"></script>
+<script src="$rc.contextPath/js/prettify.min.js"></script>
+<!-- jQuery custom content scroller -->
+<script src="$rc.contextPath/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="$rc.contextPath/js/custom.js"></script>
+<script src="$rc.contextPath/js/icheck.min.js"></script>
+
+<script src="$rc.contextPath/js/jquery.listswap.js"></script>
+<script src="$rc.contextPath/js/jstree.min.js"></script>
+
+<script src="$rc.contextPath/js/moment.min.js"></script>
+<script src="$rc.contextPath/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="$rc.contextPath/js/jquery.knob.js"></script>
+
+
+<script src="$rc.contextPath/js/validator.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	if($.isFunction(window.frameinit)){
+		frameinit();
+	}
+});
+
+function myprofile(){
+	location = "$rc.contextPath/myprofile/"
+}
+
+function syssetting(){
+	location = "$rc.contextPath/systemsetting/"
+}
+</script>
+
+</html>

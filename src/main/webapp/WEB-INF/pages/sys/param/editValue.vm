@@ -1,0 +1,45 @@
+ 
+  <div class="title_left">
+    <h3>Parameter Values for [$!{model.paramName}]</h3>
+  </div>
+   <div class="x_content">
+<br />
+<form id="editForm" data-parsley-validate class="form-horizontal form-label-left" action="$rc.contextPath/sys/param/saveValue" method="post">
+	<input type="hidden" name="id" value="$!{model.id}">
+	<input type="hidden" name="paramName" value="$!{model.paramName}">
+	#foreach($config in $configList)
+		#set($dynamicValueExpression = "$model.value$velocityCount")
+		#set($dvalue = "#evaluate($dynamicValueExpression)")
+		#if( $dvalue.indexOf("$model.value") == 0 ) 
+			#set($dvalue = "")
+		#end
+	  <div class="form-group">
+	    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">${config.showName}
+	    	#if( $!{config.notNull} == "1")
+	    	 <span class="required">*</span>
+	    	 #end
+	    </label>
+	    <div class="col-md-6 col-sm-6 col-xs-12">
+	      <input type="text" name="value$velocityCount" value="$!{dvalue}"
+	      	#if( $!{config.notNull} == "1")required="required" #end class="form-control col-md-7 col-xs-12">
+	    </div>
+	  </div>
+	#end
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+      <button class="btn btn-primary" type="button" onclick="goback()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>
+
+</div>
+
+<script>
+function goback(){
+	location = "$rc.contextPath/sys/param/values/$!{model.paramName}";
+}
+
+</script>

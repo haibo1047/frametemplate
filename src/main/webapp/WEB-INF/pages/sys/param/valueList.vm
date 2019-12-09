@@ -1,0 +1,91 @@
+<div class="title_left">
+    <h3>System Parameters Values[$!{paramName}]</h3>
+</div>
+<div class="x_content">
+
+<p>
+	<button type="button" class="btn btn-round btn-primary" onclick="create()">Create</button>
+	<button type="button" class="btn btn-round btn-primary" onclick="deletemultiple()">Delete</button>
+	<button type="button" class="btn btn-round btn-primary" onclick="goback()">Return</button>
+</p>
+
+	<div class="table-responsive">
+	  	<table class="table table-striped jambo_table bulk_action">
+	   	 	<thead>
+	      		<tr class="headings">
+			        <th>
+			          	<input type="checkbox" id="check-all" class="flat">
+			        </th>
+			        #foreach($config in $configList)
+				        <th class="column-title"> ${config.configName} </th>
+			        #end
+			        <th class="column-title"> Create Time </th>
+			        <th class="column-title"> Create User </th>
+			        <th class="column-title no-link last">
+			        	<span class="nobr">
+			        		Operation
+			        	</span>
+			        </th>
+			        #set( $colspan = ${configList.size()} + 3 )
+			        <th class="bulk-actions" colspan="$colspan">
+	          			<a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+			        </th>
+	      		</tr>
+			</thead>
+	
+			<tbody>
+		    	#foreach ($model in $valueList)
+				<tr class="#if($foreach.count %2 ==0) even #else odd #end pointer">
+					<td class="a-center ">
+						<input type="checkbox" class="flat" name="table_records" value="$!{model.id}">
+					</td>
+					 #foreach($config in $configList)
+					 	 #set($dynamicValueExpression = "$model.value$velocityCount")
+						<td class=" "> #evaluate($dynamicValueExpression)</td>
+					#end
+					<td class=" "> $!date.format("yyyy-MM-dd HH:mm:ss",$!model.createTime ) </td>
+					<td class=" "> $!{model.createUser} </td>
+					<td class=" last">
+						<a href="#" onclick="editRecord(this)">Edit</a> &nbsp;
+						<a href="#" onclick="delRecord(this)">Delete</a> &nbsp;
+					</td>
+				</tr>
+		      	#end
+	    	</tbody>
+	  	</table>
+	</div>
+</div>
+
+<script>
+var ID_INDEX=1
+function goback(){
+	location = "$rc.contextPath/sys/param/list"
+}
+function create(){
+	location = "$rc.contextPath/sys/param/createValue/$!{paramName}"
+}
+function deletemultiple(){
+	var ids = "";
+	var selted = $("input[name='table_records']:checked");
+	$(selted).each(function(){
+		ids = ids + (ids.length===0?'':'-') + $(this).val();
+	});
+	if($(selted).length==0){
+		return;
+	}
+	if(confirm('确认要删除此'+$(selted).length+'条记录？')){
+		location = "$rc.contextPath/sys/param/deleteValue/${paramName}/"+ids
+	}
+}
+function editRecord(o){
+	var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+	location = "$rc.contextPath/sys/param/editValue/"+objId
+}
+function delRecord(o){
+	if (confirm('确认要删除此记录？')) {
+		var objId = $(o).parent().parent().find("td:nth-child("+ID_INDEX+")").find("input:first-child").val().trim();
+		location = "$rc.contextPath/sys/param/deleteValue/${paramName}/"+objId
+	}
+}
+
+</script>

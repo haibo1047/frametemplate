@@ -1,0 +1,95 @@
+#set($layout="/include/layout_blank.vm")
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>YLSQ frame </title>
+
+
+    <!-- Bootstrap -->
+    <link href="$rc.contextPath/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="$rc.contextPath//css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="$rc.contextPath//css/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="$rc.contextPath//css/prettify.min.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="$rc.contextPath/css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+
+    <!-- Custom styling plus plugins -->
+    <link href="$rc.contextPath/css/custom.min.css" rel="stylesheet">
+    <link href="$rc.contextPath/css/green.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          $!{errorMsg}
+          <br><br>
+          <section class="login_content">
+            <form id="login_form" action="$rc.contextPath/sys/login" method="post">
+              <h1>#springMessage("system.loginform")</h1>
+              <div>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username" required="true" />
+              </div>
+              <div>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required="true" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="#" onclick="login()">#springMessage("system.login")</a>
+                <a class="reset_pass" href="#">Lost your password?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">New to site?
+                  <a href="#signup" class="to_register"> Create Account </a>
+                </p>
+
+                <div class="clearfix"></div>
+
+              </div>
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- jQuery -->
+<script src="$rc.contextPath/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#username').focus();
+	
+	$('#username').bind('keypress',function(event){
+		if(event.keyCode == "13"){
+			$("#password").focus();
+		}
+	});
+	
+	$('#password').bind('keypress',function(event){
+		if(event.keyCode == "13"){
+			login();
+		}
+	});
+});
+function login(){
+	$("#login_form").submit();
+}
+</script>
+	
+	

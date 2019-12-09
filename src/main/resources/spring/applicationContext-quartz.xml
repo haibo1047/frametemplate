@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    
+	<bean id="dbAutomatBackUpJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ylsq.frame.sys.quartz.DbAutomatBackUpJob" />
+        <property name="jobDataMap">
+            <map>
+            	<entry key="uname" value="${master.jdbc.username}" />
+            	<entry key="upassword" value="${master.jdbc.password}" />
+            	<entry key="dburl" value="${master.jdbc.url}" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
+    
+	<bean id="dbBackupCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="dbAutomatBackUpJob"/>
+		<!-- run every 4AM -->
+		<property name="cronExpression" value="0 0 4 * * ?"/>
+	</bean>
+
+</beans>
